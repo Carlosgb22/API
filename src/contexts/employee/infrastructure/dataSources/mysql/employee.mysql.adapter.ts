@@ -49,8 +49,8 @@ conn = connect()
     async updateEmployee(emp: Employee): Promise<boolean> {
         loggerService.info("Actualizando empleado...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("UPDATE Employee SET DNI = ?, Name = ?, Family_Name = ?, Phone = ?, SS = ?, Clerk = ?, Master = ? WHERE DNI = ?",
-                [emp.dni, emp.name, emp.family_name, emp.phone, emp.ss, emp.clerk, emp.master, emp.dni], function (error, results, fields) {
+            (await this.conn).query("UPDATE Employee SET Name = ?, Family_Name = ?, Phone = ?, SS = ?, Clerk = ?, Master = ? WHERE DNI = ?",
+                [emp.name, emp.family_name, emp.phone, emp.ss, emp.clerk, emp.master, emp.dni], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
                 });

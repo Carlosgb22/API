@@ -36,16 +36,16 @@ conn = connect()
         })
     }
     async deleteEvent(id: number): Promise<boolean> {
-        loggerService.info("Borrando empleado...")
+        loggerService.info("Borrando evento...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("DELETE FROM Evenet WHERE ID = " + (await this.conn).escape(id), function (error, results, fields) {
+            (await this.conn).query("DELETE FROM Event WHERE ID = " + (await this.conn).escape(id), function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });
         })
     }
     async updateEvent(event: Event): Promise<boolean> {
-        loggerService.info("Actualizando empleado...")
+        loggerService.info("Actualizando evento...")
         const date = event.date.getFullYear + '-' + event.date.getMonth + '-' + event.date.getDay;
         return new Promise<boolean>(async (resolve, reject) => {
             (await this.conn).query("UPDATE Event SET 'Date' = '?', 'Phone_1' = ?, 'Phone_2' = ?, Place_Name = ? WHERE ID = ?",
