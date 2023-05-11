@@ -7,11 +7,11 @@ export function getAllPlaces(req: Request, res: Response) {
 }
 
 export function getPlaceById(req: Request, res: Response) {
-    getPlaceByIdEx(req.params.id).then((place) => res.json(place)).catch((err) => loggerService.error("Error displaying place with id= " + req.body + " " + err));
+    getPlaceByIdEx(req.params.name).then((place) => res.json(place)).catch((err) => loggerService.error("Error displaying place with name= " + req.body + " " + err));
 }
 
 export function deletePlace(req: Request, res: Response) {
-    deletePlaceEx(req.params.id).then((bool) => res.json(bool)).catch((err) => loggerService.error("Error deleting place " + err));
+    deletePlaceEx(req.params.name).then((bool) => res.json(bool)).catch((err) => loggerService.error("Error deleting place " + err));
 }
 
 export function addPlace(req: Request, res: Response) {

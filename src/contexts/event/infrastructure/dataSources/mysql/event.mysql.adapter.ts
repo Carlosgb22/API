@@ -27,8 +27,8 @@ conn = connect()
         loggerService.info("Añadiendo evento...")
         const date = event.date.getFullYear + '-' + event.date.getMonth + '-' + event.date.getDay;
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("INSERT INTO Event('Date','Phone_1','Phone_2','Place_Name') VALUES ('?', ?, ?, ?)", 
-                [date, event.phone_1, event.phone_2, event.place_name],
+            (await this.conn).query("INSERT INTO Event('Id_Catering', 'Date','Phone_1','Phone_2','Place_Name') VALUES ('?', ?, ?, ?, ?)", 
+                [event.id_catering, date, event.phone_1, event.phone_2, event.place_name],
                 function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
@@ -48,7 +48,7 @@ conn = connect()
         loggerService.info("Actualizando evento...")
         const date = event.date.getFullYear + '-' + event.date.getMonth + '-' + event.date.getDay;
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("UPDATE Event SET 'Date' = '?', 'Phone_1' = ?, 'Phone_2' = ?, Place_Name = ? WHERE ID = ?",
+            (await this.conn).query("UPDATE Event SET 'Id_Catering' = ?, 'Date' = '?', 'Phone_1' = ?, 'Phone_2' = ?, Place_Name = ? WHERE ID = ?",
                 [date, event.phone_1, event.phone_2, event.place_name, event.id], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);

@@ -7,11 +7,11 @@ export function getAllEvents(req: Request, res: Response) {
 }
 
 export function getEventById(req: Request, res: Response) {
-    getEventByIdEx(Number.parseInt(req.params.id)).then((event) => res.json(event)).catch((err) => loggerService.error("Error displaying event with id= " + req.body + " " + err));
+    getEventByIdEx(parseInt(req.params.id)).then((event) => res.json(event)).catch((err) => loggerService.error("Error displaying event with id= " + req.body + " " + err));
 }
 
 export function deleteEvent(req: Request, res: Response) {
-    deleteEventEx(Number.parseInt(req.params.id)).then((bool) => res.json(bool)).catch((err) => loggerService.error("Error deleting event " + err));
+    deleteEventEx(parseInt(req.params.id)).then((bool) => res.json(bool)).catch((err) => loggerService.error("Error deleting event " + err));
 }
 
 export function addEvent(req: Request, res: Response) {

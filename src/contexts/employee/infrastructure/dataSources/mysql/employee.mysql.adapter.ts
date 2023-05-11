@@ -28,7 +28,7 @@ conn = connect()
     async addEmployee(emp: Employee): Promise<boolean> {
         loggerService.info("Añadiendo empleado...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("INSERT INTO Employee VALUES (?, ?, ?, ?, ?, ?, ?)", [emp.dni, emp.name, emp.family_name, emp.phone, emp.ss, emp.clerk, emp.master],
+            (await this.conn).query("INSERT INTO Employee VALUES (?, ?, ?, ?, ?, ?, ?)", [emp.dni, emp.id_catering, emp.name, emp.family_name, emp.phone, emp.ss, emp.clerk],
                 function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
@@ -49,8 +49,8 @@ conn = connect()
     async updateEmployee(emp: Employee): Promise<boolean> {
         loggerService.info("Actualizando empleado...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("UPDATE Employee SET Name = ?, Family_Name = ?, Phone = ?, SS = ?, Clerk = ?, Master = ? WHERE DNI = ?",
-                [emp.name, emp.family_name, emp.phone, emp.ss, emp.clerk, emp.master, emp.dni], function (error, results, fields) {
+            (await this.conn).query("UPDATE Employee SET Id_Catering = ?, Name = ?, Family_Name = ?, Phone = ?, SS = ?, Clerk = ? WHERE DNI = ?",
+                [emp.name, emp.id_catering, emp.family_name, emp.phone, emp.ss, emp.clerk, emp.dni], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
                 });

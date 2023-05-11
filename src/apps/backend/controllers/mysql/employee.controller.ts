@@ -7,11 +7,11 @@ export function getAllEmployees(req: Request, res: Response) {
 }
 
 export function getEmployeeById(req: Request, res: Response) {
-    getEmployeeByIdEx(req.params.id).then((employee) => res.json(employee)).catch((err) => loggerService.error("Error displaying employee with id= " + req.body + " " + err));
+    getEmployeeByIdEx(req.params.dni).then((employee) => res.json(employee)).catch((err) => loggerService.error("Error displaying employee with dni= " + req.body + " " + err));
 }
 
 export function deleteEmployee(req: Request, res: Response) {
-    deleteEmployeeEx(req.params.id).then((bool) => res.json(bool)).catch((err) => loggerService.error("Error deleting employee " + err));
+    deleteEmployeeEx(req.params.dni).then((bool) => res.json(bool)).catch((err) => loggerService.error("Error deleting employee " + err));
 }
 
 export function addEmployee(req: Request, res: Response) {

@@ -47,7 +47,7 @@ conn = connect()
         loggerService.info("Actualizando lugar...")
         return new Promise<boolean>(async (resolve, reject) => {
             (await this.conn).query("UPDATE Place SET 'Name' = '?', 'Address' = ?, 'Phone' = ? WHERE Name = ?",
-                [place.name, place.address, place.phone], function (error, results, fields) {
+                [place.name, place.address, place.phone, place.name], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
                 });
