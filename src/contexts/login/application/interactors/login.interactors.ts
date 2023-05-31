@@ -19,8 +19,8 @@ export function updateLoginEx(login: Login) {
     return updateLogin(adapter)(login);
 }
 
-export function getLoginByIdEx(dni: string):Promise<Login>{
-    return getLoginById(adapter)(dni);
+export function getLoginByIdEx(dni: string, password: string):Promise<boolean>{
+    return getLoginById(adapter)(dni, password);
 }
 
 export function getAllLoginsEx(): Promise<Array<Login>> {

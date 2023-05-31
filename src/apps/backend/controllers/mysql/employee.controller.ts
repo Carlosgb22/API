@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import loggerService from "../../../../services/loggerService";
 
 export function getAllEmployees(req: Request, res: Response) {
-    getAllEmployeesEx().then((employees) => res.json(employees)).catch((err) => loggerService.error("Error displaying employees " + err));
+    getAllEmployeesEx(parseInt(req.params.id_catering)).then((employees) => res.json(employees)).catch((err) => loggerService.error("Error displaying employees " + err));
 }
 
 export function getEmployeeById(req: Request, res: Response) {

@@ -23,6 +23,6 @@ export function getEmployeeByIdEx(id: String):Promise<Employee>{
     return getEmployeeById(adapter)(id);
 }
 
-export function getAllEmployeesEx(): Promise<Array<Employee>> {
-    return getAllEmployees(adapter);
+export function getAllEmployeesEx(id_catering: number): Promise<Array<Employee>> {
+    return getAllEmployees(adapter)(id_catering);
 }

@@ -14,12 +14,16 @@ conn = connect()
             });
         })
     }
-    async getLoginById(dni: string): Promise<Login> {
+    async getLoginById(dni: string, password: string): Promise<boolean> {
         loggerService.info("Obteniendo login por su id...")
-        return new Promise<Login>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Login WHERE ID = " + (await this.conn).escape(dni), function (error, results, fields) {
+        return new Promise<boolean>(async (resolve, reject) => {
+            (await this.conn).query("SELECT * FROM Login WHERE DNI = " + (await this.conn).escape(dni), function (error, results, fields) {
                 if (error) loggerService.error(error);
-                resolve(results);
+                if (results[0]['Password'] === password) {
+                    resolve(true);
+                }else{
+                    resolve(false);
+                }
             });
         })
     }
@@ -46,7 +50,7 @@ conn = connect()
     async updateLogin(Login: Login): Promise<boolean> {
         loggerService.info("Actualizando login...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("UPDATE Login SET 'DNI' = '?', 'Password' = ? WHERE DNI = ?",
+            (await this.conn).query("UPDATE Login SET 'DNI' = '?', 'Password' = '?' WHERE DNI = ?",
                 [Login.dni, Login.password], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);

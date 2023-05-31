@@ -7,7 +7,7 @@ import {addCatering, deleteCatering, getAllCaterings, getCateringById, updateCat
 
 const router = Router();
 
-router.get("/employee", getAllEmployees);
+router.get("/employee/all/:id_catering", getAllEmployees);
 router.get("/employee/:dni", getEmployeeById);
 router.delete("/employee/:dni", deleteEmployee);
 router.post("/employee/add", addEmployee);
@@ -26,7 +26,7 @@ router.post("/place/add", addPlace);
 router.post("/place/:name/update", updatePlace);
 
 router.get("/login", getAllLogins);
-router.get("/login/:dni", getLoginById);
+router.get("/login/:dni/:password", getLoginById);
 router.delete("/login/:dni", deleteLogin);
 router.post("/login/add", addLogin);
 router.post("/login/:dni/update", updateLogin);

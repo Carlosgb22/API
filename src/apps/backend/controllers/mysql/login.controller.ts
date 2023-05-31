@@ -3,11 +3,16 @@ import { Request, Response } from "express";
 import loggerService from "../../../../services/loggerService";
 
 export function getAllLogins(req: Request, res: Response) {
-    getAllLoginsEx().then((Logins) => res.json(Logins)).catch((err) => loggerService.error("Error displaying Logins " + err));
+    getAllLoginsEx().then((logins) => res.json(logins)).catch((err) => loggerService.error("Error displaying Logins " + err));
 }
 
 export function getLoginById(req: Request, res: Response) {
-    getLoginByIdEx(req.params.dni).then((login) => res.json(login)).catch((err) => loggerService.error("Error displaying login with dni= " + req.body + " " + err));
+    getLoginByIdEx(req.params.dni, req.params.password).then((bool) => {
+        if (bool) {
+            req.session.dni = req.params.dni
+        }
+        res.json(bool);
+    }).catch((err) => loggerService.error("Error displaying login with dni= " + req.params.dni + " " + err));
 }
 
 export function deleteLogin(req: Request, res: Response) {

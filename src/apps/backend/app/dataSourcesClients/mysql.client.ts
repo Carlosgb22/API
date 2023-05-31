@@ -2,20 +2,21 @@ import mysql from 'mysql';
 import loggerService from '../../../../services/loggerService';
 
 export default async function connect() {
-    const conn = mysql.createConnection({
+    const options = {
         host: 'localhost',
         user: 'usuario',
         password: 'usuario',
         database: 'Catering'
-    });
-    loggerService.info(new Date().toString() + ": " + "MySql connected");
+    }
+    const conn = mysql.createConnection(options);
+    
     process.on("SIGINT", () => {
         conn.end();
         process.exit();
     });
+    
     process.on("exit", () => {
         conn.end();
-        loggerService.info(new Date().toString() + ": MySql disconnected");
     });
     return conn;
 }

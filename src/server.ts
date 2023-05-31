@@ -3,7 +3,6 @@ import appClient from "../src/apps/backend/app/rest/http.client";
 import config from "./apps/backend/config/config";
 const expressPinoLogger = require('express-pino-logger');
 import loggerService from './services/loggerService';
-import connect from "./apps/backend/app/dataSourcesClients/mysql.client";
 
 class Server {
     app: Application;
@@ -22,7 +21,6 @@ class Server {
         try {
             this.app.listen(config.PORT, async () => {
                 loggerService.info(`Servidor corriendo en el puerto: ${config.PORT}`);
-                connect();
             });
         } catch (error: any) {
             loggerService.error(error);
