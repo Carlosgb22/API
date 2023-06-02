@@ -3,8 +3,8 @@ import Login from "../../../domain/entities/login";
 import database from "../../../domain/repositories/login.repo";
 import loggerService from "../../../../../services/loggerService";
 
-export default class LoginMySql implements database{
-conn = connect()
+export default class LoginMySql implements database {
+    conn = connect()
     async getAllLogins(): Promise<Array<Login>> {
         loggerService.info("Obteniendo logines...")
         return new Promise<Array<Login>>(async (resolve, reject) => {
@@ -19,9 +19,11 @@ conn = connect()
         return new Promise<boolean>(async (resolve, reject) => {
             (await this.conn).query("SELECT * FROM Login WHERE DNI = " + (await this.conn).escape(dni), function (error, results, fields) {
                 if (error) loggerService.error(error);
-                if (results[0]['Password'] === password) {
-                    resolve(true);
-                }else{
+                if (results[0] != null) {
+                    if (results[0]['Password'] === password) {
+                        resolve(true);
+                    }
+                } else {
                     resolve(false);
                 }
             });
@@ -30,7 +32,7 @@ conn = connect()
     async addLogin(Login: Login): Promise<boolean> {
         loggerService.info("Añadiendo login...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("INSERT INTO Login VALUES (?, ?)", 
+            (await this.conn).query("INSERT INTO Login VALUES (?, ?)",
                 [Login.dni, Login.password],
                 function (error, results, fields) {
                     if (error) loggerService.error(error);

@@ -8,7 +8,7 @@ conn = connect()
     async getAllEmployees(id_catering: number): Promise<Array<Employee>> {
         loggerService.info("Obteniendo empleados...")
         return new Promise<Array<Employee>>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Employee WHERE Id_Catering = ?;",id_catering, function (error, results, fields) {
+            (await this.conn).query("SELECT * FROM Employee WHERE Id_Catering = ? ORDER BY Family_Name;",id_catering, function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });
@@ -53,7 +53,7 @@ conn = connect()
         loggerService.info("Actualizando empleado...")
         return new Promise<boolean>(async (resolve, reject) => {
             (await this.conn).query("UPDATE Employee SET Id_Catering = ?, Name = ?, Family_Name = ?, Phone = ?, SS = ?, Clerk = ?, Admin = ? WHERE DNI = ?",
-                [emp.Name, emp.Id_Catering, emp.Family_Name, emp.Phone, emp.SS, emp.Clerk, emp.Admin, emp.DNI], function (error, results, fields) {
+                [emp.Id_Catering, emp.Name, emp.Family_Name, emp.Phone, emp.SS, emp.Clerk, emp.Admin, emp.DNI], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
                 });
