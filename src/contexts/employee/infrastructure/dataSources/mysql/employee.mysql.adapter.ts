@@ -8,7 +8,7 @@ conn = connect()
     async getAllEmployees(id_catering: number): Promise<Array<Employee>> {
         loggerService.info("Obteniendo empleados...")
         return new Promise<Array<Employee>>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Employee WHERE Id_Catering = ? ORDER BY Family_Name;", id_catering, function (error, results, fields) {
+            (await this.conn).query("SELECT * FROM Employee WHERE `Id_Catering` = ? ORDER BY `Family_Name`;", id_catering, function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });
@@ -18,7 +18,7 @@ conn = connect()
     async getEmployeeById(dni: string): Promise<Employee> {
         loggerService.info("Obteniendo empleado por su id...")
         return new Promise<Employee>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Employee WHERE DNI = " + (await this.conn).escape(dni), function (error, results, fields) {
+            (await this.conn).query("SELECT * FROM Employee WHERE `DNI` = " + (await this.conn).escape(dni), function (error, results, fields) {
                 if (error) loggerService.error(error);
                 for (const act of results) {
                     const emp: Employee = act;
@@ -42,7 +42,7 @@ conn = connect()
     async deleteEmployee(dni: String): Promise<boolean> {
         loggerService.info("Borrando empleado...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("DELETE FROM Employee WHERE DNI = " + (await this.conn).escape(dni), function (error, results, fields) {
+            (await this.conn).query("DELETE FROM Employee WHERE `DNI` = " + (await this.conn).escape(dni), function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });
@@ -52,7 +52,7 @@ conn = connect()
     async updateEmployee(emp: Employee): Promise<boolean> {
         loggerService.info("Actualizando empleado...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("UPDATE Employee SET Id_Catering = ?, Name = ?, Family_Name = ?, Phone = ?, SS = ?, Clerk = ?, Admin = ? WHERE DNI = ?",
+            (await this.conn).query("UPDATE Employee SET `Id_Catering` = ?, `Name` = ?, `Family_Name` = ?, `Phone` = ?, `SS` = ?, `Clerk` = ?, `Admin` = ? WHERE `DNI` = ?",
                 [emp.Id_Catering, emp.Name, emp.Family_Name, emp.Phone, emp.SS, emp.Clerk, emp.Admin, emp.DNI], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);

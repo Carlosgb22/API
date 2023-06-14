@@ -17,7 +17,7 @@ export default class LoginMySql implements database {
     async getLoginById(dni: string, password: string): Promise<boolean> {
         loggerService.info("Obteniendo login por su id...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Login WHERE DNI = " + (await this.conn).escape(dni), function (error, results, fields) {
+            (await this.conn).query("SELECT * FROM Login WHERE `DNI` = " + (await this.conn).escape(dni), function (error, results, fields) {
                 if (error) loggerService.error(error);
                 if (results[0] != null) {
                     if (results[0]['Password'] === password) {
@@ -44,7 +44,7 @@ export default class LoginMySql implements database {
     async deleteLogin(dni: string): Promise<boolean> {
         loggerService.info("Borrando login...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("DELETE FROM Login WHERE DNI = " + (await this.conn).escape(dni), function (error, results, fields) {
+            (await this.conn).query("DELETE FROM Login WHERE `DNI` = " + (await this.conn).escape(dni), function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });
@@ -53,7 +53,7 @@ export default class LoginMySql implements database {
     async updateLogin(Login: Login): Promise<boolean> {
         loggerService.info("Actualizando login...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("UPDATE Login SET 'DNI' = '?', 'Password' = '?' WHERE DNI = ?",
+            (await this.conn).query("UPDATE Login SET `DNI` = `?`, `Password` = `?` WHERE DNI = ?",
                 [Login.DNI, Login.Password], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);

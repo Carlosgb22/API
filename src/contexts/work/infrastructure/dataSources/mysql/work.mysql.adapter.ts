@@ -8,7 +8,7 @@ conn = connect()
     async getAllWorks(dni: string): Promise<Array<Work>> {
         loggerService.info("Obteniendo trabajos...")
         return new Promise<Array<Work>>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Work WHERE DNI = ?", dni, function (error, results, fields) {
+            (await this.conn).query("SELECT * FROM Work WHERE `DNI` = ?", dni, function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });
@@ -17,7 +17,7 @@ conn = connect()
     async getAllWorksId(id: number): Promise<Array<Work>> {
         loggerService.info("Obteniendo trabajos...")
         return new Promise<Array<Work>>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Work WHERE Event_ID = ?", id, function (error, results, fields) {
+            (await this.conn).query("SELECT * FROM Work WHERE `Event_ID` = ?", id, function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });
@@ -26,7 +26,7 @@ conn = connect()
     async getWorkById(dni: string, id: number): Promise<Work> {
         loggerService.info("Obteniendo trabajo por su id...")
         return new Promise<Work>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Work WHERE DNI = " + (await this.conn).escape(dni) + "AND Event_ID = " + (await this.conn).escape(id), 
+            (await this.conn).query("SELECT * FROM Work WHERE `DNI` = " + (await this.conn).escape(dni) + "AND Event_ID = " + (await this.conn).escape(id), 
             function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
@@ -47,7 +47,7 @@ conn = connect()
     async deleteWork(dni: string, id: number): Promise<boolean> {
         loggerService.info("Borrando trabajo...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("DELETE FROM Work WHERE DNI = " + (await this.conn).escape(dni) + "AND Event_ID = " + (await this.conn).escape(id), 
+            (await this.conn).query("DELETE FROM Work WHERE `DNI` = " + (await this.conn).escape(dni) + "AND `Event_ID` = " + (await this.conn).escape(id), 
             function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
@@ -57,7 +57,7 @@ conn = connect()
     async updateWork(work: Work): Promise<boolean> {
         loggerService.info("Actualizando trabajo...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("UPDATE Work SET 'DNI' = '?', 'Event_ID' = ?, 'Id_Catering' = ?, 'Master' = ?, 'Assembly' = ?, 'Service' = ?, 'OpenBar' = ? WHERE DNI = ?",
+            (await this.conn).query("UPDATE Work SET `DNI` = ?, `Event_ID` = ?, `Id_Catering` = ?, `Master` = ?, `Assembly` = ?, `Service` = ?, `OpenBar` = ? WHERE DNI = ?",
                 [work.DNI, work.Event_Id, work.Id_Catering, work.Master, work.Assembly, work.Service, work.Service, work.DNI], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
