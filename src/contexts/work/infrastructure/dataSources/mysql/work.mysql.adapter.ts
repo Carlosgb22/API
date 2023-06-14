@@ -17,7 +17,7 @@ conn = connect()
     async getAllWorksId(id: number): Promise<Array<Work>> {
         loggerService.info("Obteniendo trabajos...")
         return new Promise<Array<Work>>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Work WHERE DNI = ?", id, function (error, results, fields) {
+            (await this.conn).query("SELECT * FROM Work WHERE Event_ID = ?", id, function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });

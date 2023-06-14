@@ -4,7 +4,7 @@ import { addEvent, deleteEvent, getAllEvents, getEventById, updateEvent } from "
 import { addPlace, deletePlace, getAllPlaces, getPlaceById, updatePlace } from "../../controllers/mysql/place.controller";
 import { getAllLogins, getLoginById, deleteLogin, addLogin, updateLogin } from "../../controllers/mysql/login.controller";
 import {addCatering, deleteCatering, getAllCaterings, getCateringById, updateCatering} from "../../controllers/mysql/catering.controller";
-import { addWork, deleteWork, getAllWorks, getWorkById, updateWork } from "../../controllers/mysql/work.controller";
+import { addWork, deleteWork, getAllWorks, getAllWorksId, getWorkById, updateWork } from "../../controllers/mysql/work.controller";
 
 const router = Router();
 
@@ -39,6 +39,7 @@ router.post("/catering/add", addCatering);
 router.post("/catering/:id/update", updateCatering);
 
 router.get("/work/all/:dni", getAllWorks);
+router.get("/work/all/id/:id", getAllWorksId);
 router.get("/work/:dni/:id", getWorkById);
 router.delete("/work/:dni/:id", deleteWork);
 router.post("/work/add", addWork);
