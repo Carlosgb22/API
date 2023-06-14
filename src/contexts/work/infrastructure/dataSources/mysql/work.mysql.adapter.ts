@@ -14,6 +14,15 @@ conn = connect()
             });
         })
     }
+    async getAllWorksId(id: number): Promise<Array<Work>> {
+        loggerService.info("Obteniendo trabajos...")
+        return new Promise<Array<Work>>(async (resolve, reject) => {
+            (await this.conn).query("SELECT * FROM Work WHERE DNI = ?", id, function (error, results, fields) {
+                if (error) loggerService.error(error);
+                resolve(results);
+            });
+        })
+    }
     async getWorkById(dni: string, id: number): Promise<Work> {
         loggerService.info("Obteniendo trabajo por su id...")
         return new Promise<Work>(async (resolve, reject) => {

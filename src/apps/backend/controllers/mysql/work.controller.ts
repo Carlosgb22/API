@@ -1,9 +1,13 @@
-import { addWorkEx, deleteWorkEx, getAllWorksEx, getWorkByIdEx, updateWorkEx } from "../../../../contexts/work/application/interactors/work.interactors";
+import { addWorkEx, deleteWorkEx, getAllWorksEx, getWorkByIdEx, updateWorkEx, getAllWorksIdEx } from "../../../../contexts/work/application/interactors/work.interactors";
 import { Request, Response } from "express";
 import loggerService from "../../../../services/loggerService";
 
 export function getAllWorks(req: Request, res: Response) {
     getAllWorksEx(req.params.dni).then((Works) => res.json(Works)).catch((err) => loggerService.error("Error displaying works " + err));
+}
+
+export function getAllWorksId(req: Request, res: Response) {
+    getAllWorksIdEx(parseInt(req.params.id)).then((Works) => res.json(Works)).catch((err) => loggerService.error("Error displaying works " + err));
 }
 
 export function getWorkById(req: Request, res: Response) {
