@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import loggerService from "../../../../services/loggerService";
 
 export function getAllPlaces(req: Request, res: Response) {
-    getAllPlacesEx().then((places) => res.json(places)).catch((err) => loggerService.error("Error displaying places " + err));
+    getAllPlacesEx(parseInt(req.params.id_catering)).then((places) => res.json(places)).catch((err) => loggerService.error("Error displaying places " + err));
 }
 
 export function getPlaceById(req: Request, res: Response) {

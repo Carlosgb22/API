@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import loggerService from "../../../../services/loggerService";
 
 export function getAllEvents(req: Request, res: Response) {
-    getAllEventsEx().then((events) => res.json(events)).catch((err) => loggerService.error("Error displaying events " + err));
+    getAllEventsEx(parseInt(req.params.id_catering)).then((events) => res.json(events)).catch((err) => loggerService.error("Error displaying events " + err));
 }
 
 export function getEventById(req: Request, res: Response) {

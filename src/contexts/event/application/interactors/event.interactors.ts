@@ -7,7 +7,7 @@ import getAllEvents from "./getAll.event.interactors";
 import updateEvent from "./update.event.interactors";
 
 const adapter = new EventMySQL;
-export function addEventEx(event: Event) {
+export function addEventEx(event: Event):Promise<number> {
     return addEvent(adapter)(event);
 }
 
@@ -23,6 +23,6 @@ export function getEventByIdEx(id: number):Promise<Event>{
     return getEventById(adapter)(id);
 }
 
-export function getAllEventsEx(): Promise<Array<Event>> {
-    return getAllEvents(adapter);
+export function getAllEventsEx(id_Catering: number): Promise<Array<Event>> {
+    return getAllEvents(adapter)(id_Catering);
 }

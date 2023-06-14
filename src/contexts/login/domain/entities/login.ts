@@ -1,4 +1,4 @@
 export default interface Login {
-    dni: string
-    password: string
+    DNI: string
+    Password: string
 }

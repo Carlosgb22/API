@@ -23,6 +23,6 @@ export function getWorkByIdEx(dni: string, id: number):Promise<Work>{
     return getWorkById(adapter)(dni, id);
 }
 
-export function getAllWorksEx(): Promise<Array<Work>> {
-    return getAllWorks(adapter);
+export function getAllWorksEx(dni: string): Promise<Array<Work>> {
+    return getAllWorks(adapter)(dni);
 }

@@ -23,6 +23,6 @@ export function getPlaceByIdEx(name: string):Promise<Place>{
     return getPlaceById(adapter)(name);
 }
 
-export function getAllPlacesEx(): Promise<Array<Place>> {
-    return getAllPlaces(adapter);
+export function getAllPlacesEx(id_catering: number): Promise<Array<Place>> {
+    return getAllPlaces(adapter)(id_catering);
 }

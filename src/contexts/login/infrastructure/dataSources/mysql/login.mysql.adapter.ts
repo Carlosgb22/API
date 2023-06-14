@@ -31,9 +31,10 @@ export default class LoginMySql implements database {
     }
     async addLogin(Login: Login): Promise<boolean> {
         loggerService.info("Añadiendo login...")
+        console.log(Login);
         return new Promise<boolean>(async (resolve, reject) => {
             (await this.conn).query("INSERT INTO Login VALUES (?, ?)",
-                [Login.dni, Login.password],
+                [Login.DNI, Login.Password],
                 function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
@@ -53,7 +54,7 @@ export default class LoginMySql implements database {
         loggerService.info("Actualizando login...")
         return new Promise<boolean>(async (resolve, reject) => {
             (await this.conn).query("UPDATE Login SET 'DNI' = '?', 'Password' = '?' WHERE DNI = ?",
-                [Login.dni, Login.password], function (error, results, fields) {
+                [Login.DNI, Login.Password], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
                 });

@@ -1,7 +1,9 @@
 export default interface Work {
-    dni: string
-    event_id: number
-    id_catering: number
-    hours: number
-    master: boolean
+    DNI: string
+    Event_Id: number
+    Id_Catering: number
+    Master: number
+    Assembly: number
+    Service: number
+    OpenBar: number
 }

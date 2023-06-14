@@ -33,7 +33,7 @@ app.use(session({
     key: 'session_cookie',
     secret: 'kcvfbthrnymyt',
     store: sessionStore,
-    resave: false,
+    resave: true,
     saveUninitialized: false
 }))
 
@@ -60,13 +60,22 @@ app.get("/api/doc", (req, res) => {
     loggerService.info("Doc Api");
 });
 
-app.get("/checkSession", (req, res) => {
-    if(req.session) {
-        getEmployeeByIdEx(req.session.dni!).then((employee) => {
+app.get("/checkSession/:dni", (req, res) => {
+    if (req.session) {
+        getEmployeeByIdEx(req.params.dni).then((employee) => {
+            loggerService.info("Sesion Valida");
             res.json(employee)
         }).catch((err) => loggerService.error("Error displaying employee with dni= " + req.body + " " + err));
-    }else res.send(false)
-    loggerService.info("Comprobando sesion");
+    } else {
+        res.send(false)
+        loggerService.info("No existe sesion");
+    }
+});
+
+app.get("/closeSession", (req, res) => {
+    req.session.destroy;
+    loggerService.info("Sesion Cerrada")
+    res.send(true)
 });
 
 app.use('/', routes);

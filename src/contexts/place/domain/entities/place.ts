@@ -1,5 +1,6 @@
 export default interface Place {
-    name: string
-    address: string
-    phone: number
+    Name: string
+    Id_Catering: number
+    Address: string
+    Phone: number
 }

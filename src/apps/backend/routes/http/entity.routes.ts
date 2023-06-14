@@ -4,6 +4,7 @@ import { addEvent, deleteEvent, getAllEvents, getEventById, updateEvent } from "
 import { addPlace, deletePlace, getAllPlaces, getPlaceById, updatePlace } from "../../controllers/mysql/place.controller";
 import { getAllLogins, getLoginById, deleteLogin, addLogin, updateLogin } from "../../controllers/mysql/login.controller";
 import {addCatering, deleteCatering, getAllCaterings, getCateringById, updateCatering} from "../../controllers/mysql/catering.controller";
+import { addWork, deleteWork, getAllWorks, getWorkById, updateWork } from "../../controllers/mysql/work.controller";
 
 const router = Router();
 
@@ -13,13 +14,13 @@ router.delete("/employee/:dni", deleteEmployee);
 router.post("/employee/add", addEmployee);
 router.post("/employee/:dni/update", updateEmployee);
 
-router.get("/event", getAllEvents);
+router.get("/event/all/:id_catering", getAllEvents);
 router.get("/event/:id", getEventById);
 router.delete("/event/:id", deleteEvent);
 router.post("/event/add", addEvent);
 router.post("/event/:id/update", updateEvent);
 
-router.get("/place", getAllPlaces);
+router.get("/place/all/:id_catering", getAllPlaces);
 router.get("/place/:name", getPlaceById);
 router.delete("/place/:name", deletePlace);
 router.post("/place/add", addPlace);
@@ -36,5 +37,12 @@ router.get("/catering/:id", getCateringById);
 router.delete("/catering/:id", deleteCatering);
 router.post("/catering/add", addCatering);
 router.post("/catering/:id/update", updateCatering);
+
+router.get("/work/all/:dni", getAllWorks);
+router.get("/work/:dni/:id", getWorkById);
+router.delete("/work/:dni/:id", deleteWork);
+router.post("/work/add", addWork);
+router.post("/work/:dni/:id/update", updateWork);
+
 
 export default router;

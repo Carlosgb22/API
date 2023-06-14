@@ -5,10 +5,10 @@ import loggerService from "../../../../../services/loggerService";
 
 export default class WorkMySql implements database{
 conn = connect()
-    async getAllWorks(): Promise<Array<Work>> {
+    async getAllWorks(dni: string): Promise<Array<Work>> {
         loggerService.info("Obteniendo trabajos...")
         return new Promise<Array<Work>>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Work", function (error, results, fields) {
+            (await this.conn).query("SELECT * FROM Work WHERE DNI = ?", dni, function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });
@@ -27,8 +27,8 @@ conn = connect()
     async addWork(work: Work): Promise<boolean> {
         loggerService.info("Añadiendo trabajo...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("INSERT INTO Work VALUES (?, ?, ?, ?, ?)", 
-                [work.dni, work.event_id, work.id_catering, work.hours, work.master],
+            (await this.conn).query("INSERT INTO Work VALUES (?, ?, ?, ?, ?, ?, ?)", 
+                [work.DNI, work.Event_Id, work.Id_Catering, work.Master, work.Assembly, work.Service, work.OpenBar],
                 function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
@@ -48,8 +48,8 @@ conn = connect()
     async updateWork(work: Work): Promise<boolean> {
         loggerService.info("Actualizando trabajo...")
         return new Promise<boolean>(async (resolve, reject) => {
-            (await this.conn).query("UPDATE Work SET 'DNI' = '?', 'Event_ID' = ?, 'Id_Catering' = ?, 'Hours' = ?, 'Master' = ? WHERE DNI = ?",
-                [work.dni, work.event_id, work.id_catering, work.hours, work.dni], function (error, results, fields) {
+            (await this.conn).query("UPDATE Work SET 'DNI' = '?', 'Event_ID' = ?, 'Id_Catering' = ?, 'Master' = ?, 'Assembly' = ?, 'Service' = ?, 'OpenBar' = ? WHERE DNI = ?",
+                [work.DNI, work.Event_Id, work.Id_Catering, work.Master, work.Assembly, work.Service, work.Service, work.DNI], function (error, results, fields) {
                     if (error) loggerService.error(error);
                     resolve(results);
                 });

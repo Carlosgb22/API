@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import loggerService from "../../../../services/loggerService";
 
 export function getAllWorks(req: Request, res: Response) {
-    getAllWorksEx().then((Works) => res.json(Works)).catch((err) => loggerService.error("Error displaying works " + err));
+    getAllWorksEx(req.params.dni).then((Works) => res.json(Works)).catch((err) => loggerService.error("Error displaying works " + err));
 }
 
 export function getWorkById(req: Request, res: Response) {

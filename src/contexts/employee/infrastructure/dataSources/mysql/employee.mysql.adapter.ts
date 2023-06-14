@@ -8,7 +8,7 @@ conn = connect()
     async getAllEmployees(id_catering: number): Promise<Array<Employee>> {
         loggerService.info("Obteniendo empleados...")
         return new Promise<Array<Employee>>(async (resolve, reject) => {
-            (await this.conn).query("SELECT * FROM Employee WHERE Id_Catering = ? ORDER BY Family_Name;",id_catering, function (error, results, fields) {
+            (await this.conn).query("SELECT * FROM Employee WHERE Id_Catering = ? ORDER BY Family_Name;", id_catering, function (error, results, fields) {
                 if (error) loggerService.error(error);
                 resolve(results);
             });
